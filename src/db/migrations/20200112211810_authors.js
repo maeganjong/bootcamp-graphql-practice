@@ -12,13 +12,15 @@ exports.up = knex => knex.schema.createTable('authors', table => {
 
   table.integer('age')
 
-  table.string('email').unique()
+  table.string('email').unique().notNullable()
 
   table.integer('numBooksPublished').defaultTo(0)
 
   table
     .uuid('addressId')
     .references('addresses.id')
+
+  table.string('password').notNullable()
 
   table.timestamp('createdAt').defaultTo(knex.fn.now())
   table.timestamp('updatedAt').defaultTo(knex.fn.now())
